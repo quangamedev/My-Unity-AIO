@@ -3,7 +3,7 @@ using System.Linq;
 using DesignPatterns.Singleton;
 using UnityEngine;
 
-namespace ManagersAndSystems.AudioManager
+namespace Systems.AudioManager
 {
     public class AudioManager : Singleton<AudioManager>
     {
