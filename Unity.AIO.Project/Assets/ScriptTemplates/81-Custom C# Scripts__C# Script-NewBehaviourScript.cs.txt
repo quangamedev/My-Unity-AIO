@@ -13,7 +13,7 @@ using System.Collections.Generic;
 /// </summary>
 public class #SCRIPTNAME# : MonoBehaviour
 {
-    #region Variables
+    #region Fields
     #NOTRIM#
     #endregion
 
