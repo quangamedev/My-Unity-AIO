@@ -1,0 +1,31 @@
+/*--------------------------------------
+Author: NAME
++---------------------------------------
+Last modified by: NAME
+--------------------------------------*/
+
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+/// <summary>
+/// 
+/// </summary>
+public class #SCRIPTNAME# : MonoBehaviour
+{
+    #region Variables
+    #NOTRIM#
+    #endregion
+
+    #region Unity Methods
+    void Start()
+    {
+        #NOTRIM#
+    }
+ 
+    void Update()
+    {
+        #NOTRIM#
+    }
+    #endregion
+}
