@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace DesignPatterns.Singleton
 {
-    /// <summary>
+    /// <summary>           
     /// Basic Singleton class. Make any class inherit from this one to turn it into a Singleton.
     /// An Object will be created upon instance getter if the the instance is null (lazy instantiation).
     /// Prevents duplicates 
@@ -36,7 +36,7 @@ namespace DesignPatterns.Singleton
             }
         }
 
-        //if the derived class calls Awake(), the below code will not run
+        //if the derived class implements Awake(), the below code will not run
         //therefore it is virtual so it can be overriden
         protected virtual void Awake()
         {
