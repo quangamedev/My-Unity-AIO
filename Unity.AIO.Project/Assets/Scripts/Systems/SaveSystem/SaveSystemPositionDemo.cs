@@ -18,7 +18,6 @@ namespace Systems.SaveSystem
     {
         public object SaveState()
         {
-            object position;
             return new SaveData()
             {
                 posX = transform.position.x,
