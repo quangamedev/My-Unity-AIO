@@ -13,10 +13,10 @@ namespace Systems.SaveSystem
     /// An example class that needs to have data saved.
     /// This class, as well as other classes that needs saving, must implement the ISaveable interface.
     /// </summary>
-    public class SaveSystemDemo : MonoBehaviour, ISaveable
-    {
-        [SerializeField] private int _highScore = 0;
-        [SerializeField] private int _bestTime = 0;
+    public class SaveSystemScoreDemo : MonoBehaviour, ISaveable
+    {   
+        [SerializeField] private int _highScore = 100;
+        [SerializeField] private int _bestTime = 200;
         
         public object SaveState()
         {

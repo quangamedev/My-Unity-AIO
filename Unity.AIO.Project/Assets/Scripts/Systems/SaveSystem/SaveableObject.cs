@@ -70,9 +70,7 @@ namespace Systems.SaveSystem
 
                 //If a value is found successfully, call the LoadState method in the component with ISaveble and pass in the object
                 if (stateDictionary.TryGetValue(typeName, out object value))
-                {
                     saveable.LoadState(value);
-                }
             }
         }
     }
