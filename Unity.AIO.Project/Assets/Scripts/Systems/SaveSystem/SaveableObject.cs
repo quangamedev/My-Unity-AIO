@@ -16,6 +16,7 @@ namespace Systems.SaveSystem
     /// </summary>
     public class SaveableObject : MonoBehaviour
     {
+        [Tooltip("Generate this before saving or loading.")]
         [SerializeField] private string id = string.Empty;
 
         public string Id
