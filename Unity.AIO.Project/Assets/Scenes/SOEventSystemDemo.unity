@@ -169,7 +169,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1098735148}
+      - m_Target: {fileID: 1096178200}
         m_TargetAssemblyTypeName: GameEventSystemListenerDemo, Assembly-CSharp
         m_MethodName: PrintNameToConsole
         m_Mode: 1
@@ -710,7 +710,7 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1098735148}
+      - m_Target: {fileID: 1833106472}
         m_TargetAssemblyTypeName: GameEventSystemListenerDemo, Assembly-CSharp
         m_MethodName: PrintNameToConsole
         m_Mode: 1
