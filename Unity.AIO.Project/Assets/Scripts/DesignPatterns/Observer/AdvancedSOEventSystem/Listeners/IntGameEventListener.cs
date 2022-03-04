@@ -5,17 +5,15 @@ Author: Quan Nguyen
 Date:   4/3/22
 --------------------------------------*/
 
+using DesignPatterns.Observer.ScriptableObjectsEventSystem.Advanced.CustomUnityEvents;
 using DesignPatterns.Observer.ScriptableObjectsEventSystem.Advanced.EventParameters;
-using UnityEngine;
 
 namespace DesignPatterns.Observer.ScriptableObjectsEventSystem.Advanced
 {
     /// <summary>
-    /// Void game event types with no parameters (the SO itself) inheriting from the Base Game Event
+    /// The listener for custom void game events (SO) based off custom void UnityEvents
     /// </summary>
-    [CreateAssetMenu(fileName = "New VoidGameEvent", menuName = "Scriptable Objects/VoidGameEvent", order = 0)]
-    public class VoidGameEvent : BaseGameEvent<Void>
+    public class IntGameEventListener : BaseGameEventListener<int, IntGameEvent, IntUnityEvent>
     {
-        public void Raise() => Raise(new Void());
     }
 }

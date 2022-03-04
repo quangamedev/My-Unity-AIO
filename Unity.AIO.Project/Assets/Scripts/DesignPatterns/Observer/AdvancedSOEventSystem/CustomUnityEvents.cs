@@ -7,5 +7,17 @@ File Commentary: This file will be used to make custom Unity Events (with type p
 --------------------------------------*/
 
 using UnityEngine.Events;
+using DesignPatterns.Observer.ScriptableObjectsEventSystem.Advanced.EventParameters;
 
-[System.Serializable] public class VoidUnityEvent : UnityEvent<Void> { }
+namespace DesignPatterns.Observer.ScriptableObjectsEventSystem.Advanced.CustomUnityEvents
+{
+    [System.Serializable]
+    public class VoidUnityEvent : UnityEvent<Void>
+    {
+    }
+    
+    [System.Serializable]
+    public class IntUnityEvent : UnityEvent<int>
+    {
+    }
+}

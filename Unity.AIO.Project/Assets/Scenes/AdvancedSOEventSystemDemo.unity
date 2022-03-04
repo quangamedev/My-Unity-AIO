@@ -132,8 +132,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1096178202}
-  - component: {fileID: 1096178201}
   - component: {fileID: 1096178200}
+  - component: {fileID: 1096178201}
   m_Layer: 0
   m_Name: Listener B
   m_TagString: Untagged
@@ -162,17 +162,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1096178199}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a39ed021e97a88247b1e98c0f2587189, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ccc9ee6c69c04d4a9c7fb6e35b65670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 117c85d478a37234abc6ca2ef0e4e602, type: 2}
-  Response:
+  _gameEvent: {fileID: 11400000, guid: 46ea486ef57c6d64797676991a05b0fc, type: 2}
+  _unityEventResponse:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1096178200}
         m_TargetAssemblyTypeName: GameEventSystemListenerDemo, Assembly-CSharp
-        m_MethodName: PrintNameToConsole
-        m_Mode: 1
+        m_MethodName: PrintNameAndMinuteToConsole
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -204,8 +204,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1098735150}
-  - component: {fileID: 1098735149}
   - component: {fileID: 1098735148}
+  - component: {fileID: 1098735149}
   m_Layer: 0
   m_Name: Listener C
   m_TagString: Untagged
@@ -234,17 +234,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1098735147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a39ed021e97a88247b1e98c0f2587189, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ccc9ee6c69c04d4a9c7fb6e35b65670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 117c85d478a37234abc6ca2ef0e4e602, type: 2}
-  Response:
+  _gameEvent: {fileID: 11400000, guid: 46ea486ef57c6d64797676991a05b0fc, type: 2}
+  _unityEventResponse:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1098735148}
         m_TargetAssemblyTypeName: GameEventSystemListenerDemo, Assembly-CSharp
-        m_MethodName: PrintNameToConsole
-        m_Mode: 1
+        m_MethodName: PrintNameAndMinuteToConsole
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d490eb2adc682354ba85e07cf67738b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnDeveloperTest: {fileID: 11400000, guid: 117c85d478a37234abc6ca2ef0e4e602, type: 2}
+  OnIntDeveloperTest: {fileID: 11400000, guid: 46ea486ef57c6d64797676991a05b0fc, type: 2}
 --- !u!1 &1719569920
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,8 +673,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1833106474}
-  - component: {fileID: 1833106473}
   - component: {fileID: 1833106472}
+  - component: {fileID: 1833106473}
   m_Layer: 0
   m_Name: Listener A
   m_TagString: Untagged
@@ -703,17 +703,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 1833106471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a39ed021e97a88247b1e98c0f2587189, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ccc9ee6c69c04d4a9c7fb6e35b65670, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 117c85d478a37234abc6ca2ef0e4e602, type: 2}
-  Response:
+  _gameEvent: {fileID: 11400000, guid: 46ea486ef57c6d64797676991a05b0fc, type: 2}
+  _unityEventResponse:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1833106472}
         m_TargetAssemblyTypeName: GameEventSystemListenerDemo, Assembly-CSharp
-        m_MethodName: PrintNameToConsole
-        m_Mode: 1
+        m_MethodName: PrintNameAndMinuteToConsole
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

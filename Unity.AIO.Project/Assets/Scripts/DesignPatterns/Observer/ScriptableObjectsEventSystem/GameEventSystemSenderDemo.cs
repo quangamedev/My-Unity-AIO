@@ -6,18 +6,17 @@ Date:   //21
 --------------------------------------*/
 
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using DesignPatterns.Observer.ScriptableObjectsEventSystem;
+using System;
+using DesignPatterns.Observer.ScriptableObjectsEventSystem.Advanced;
 
 /// <summary>
 /// 
 /// </summary>
 public class GameEventSystemSenderDemo : MonoBehaviour
 {
-    public GameEvent OnDeveloperTest;
+    public IntGameEvent OnIntDeveloperTest;
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) OnDeveloperTest.Raise();
+        if (Input.GetKeyDown(KeyCode.E)) OnIntDeveloperTest.Raise(DateTime.Now.Minute);
     }
 }

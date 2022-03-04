@@ -15,5 +15,5 @@ using DesignPatterns.Observer.ScriptableObjectsEventSystem;
 /// </summary>
 public class GameEventSystemListenerDemo : MonoBehaviour
 {
-    public void PrintNameToConsole() => print(gameObject.name);
+    public void PrintNameAndMinuteToConsole(int date) => print(gameObject.name + " " + date);
 }

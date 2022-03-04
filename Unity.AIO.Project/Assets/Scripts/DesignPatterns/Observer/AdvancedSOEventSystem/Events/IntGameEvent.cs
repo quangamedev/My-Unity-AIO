@@ -13,9 +13,8 @@ namespace DesignPatterns.Observer.ScriptableObjectsEventSystem.Advanced
     /// <summary>
     /// Void game event types with no parameters (the SO itself) inheriting from the Base Game Event
     /// </summary>
-    [CreateAssetMenu(fileName = "New VoidGameEvent", menuName = "Scriptable Objects/VoidGameEvent", order = 0)]
-    public class VoidGameEvent : BaseGameEvent<Void>
+    [CreateAssetMenu(fileName = "New IntGameEvent", menuName = "Scriptable Objects/IntGameEvent", order = 0)]
+    public class IntGameEvent : BaseGameEvent<int>
     {
-        public void Raise() => Raise(new Void());
     }
 }
