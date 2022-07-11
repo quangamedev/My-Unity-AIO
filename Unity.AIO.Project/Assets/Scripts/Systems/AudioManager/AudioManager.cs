@@ -21,6 +21,9 @@ public class SoundClip
 
 namespace Systems.AudioManager
 {
+    /// <summary>
+    /// AudioManager for 2D games.
+    /// </summary>
     public class AudioManager : Singleton<AudioManager>
     {
         public AudioSource audioSource;
