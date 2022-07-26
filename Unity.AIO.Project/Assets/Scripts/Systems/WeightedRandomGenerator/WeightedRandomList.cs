@@ -19,7 +19,7 @@ public class WeightedRandomList<T>
 {
 
     [System.Serializable]
-    public struct Entry
+    private struct Entry
     {
         public T item;
         public int weight;

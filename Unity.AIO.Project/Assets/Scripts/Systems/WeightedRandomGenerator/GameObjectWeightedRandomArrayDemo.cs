@@ -2,7 +2,7 @@
 Unity All-in-One Project
 +---------------------------------------
 Author: Quan Nguyen
-Date:   //21
+Date:   25/7/21
 --------------------------------------*/
 
 using UnityEngine;
@@ -23,8 +23,8 @@ public class GameObjectWeightedRandomArrayDemo : MonoBehaviour
     #endregion
 
 
-    [ContextMenu("Iterate")]
-    private void Iterate()
+    [ContextMenu("Test")]
+    private void Test()
     {
 #if UNITY_EDITOR
         QuanNguyenUtils.ClearEditorLogs();
