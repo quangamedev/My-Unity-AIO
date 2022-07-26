@@ -6,7 +6,6 @@ Date:   25/7/22
 --------------------------------------*/
 
 using UnityEngine;
-using System.Collections.Generic;
 using System.Linq;
 
 /// <summary>
@@ -32,7 +31,6 @@ public class WeightedRandomArray<T>
     }
     
     //the list that contains all the drops
-    //put in order of high to low
     [SerializeField] private Entry[] _entries;
     
     public int Length => _entries.Length;
@@ -48,16 +46,15 @@ public class WeightedRandomArray<T>
         CalculateCumulativeWeights();
         
         //the total weight of items
-        var total = _entries.Sum(item => item.weight);
+        int total = _entries.Sum(item => item.weight);
 
         //random number 
-        var randomNumber = Random.Range(1, total + 1);
+        int randomNumber = Random.Range(1, total + 1);
 
         for (int i = 0; i < _cumulativeWeights.Length; i++)
         {
             if (randomNumber <= _cumulativeWeights[i])
             {
-                //return to stop the code from running, if it runs the item dropped are almost always the last item in the list
                 return _entries[i].item;
             }
         }
