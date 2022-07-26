@@ -306,6 +306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1659593871}
   - component: {fileID: 1659593870}
+  - component: {fileID: 1659593872}
   m_Layer: 0
   m_Name: WeightedRandomGeneratorDemo
   m_TagString: Untagged
@@ -348,6 +349,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1659593872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659593869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7de46d932a0b234aa24847f605214f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _entries:
+  - item: {fileID: 575123498}
+    weight: 20
+    dropChance: 15.384615
+  - item: {fileID: 326268155}
+    weight: 40
+    dropChance: 30.76923
+  - item: {fileID: 142429610}
+    weight: 70
+    dropChance: 53.846153
 --- !u!1 &1924873184
 GameObject:
   m_ObjectHideFlags: 0
