@@ -35,9 +35,7 @@ public class WeightedRandomArray<T>
     //put in order of high to low
     [SerializeField] private Entry[] _entries;
     
-    public int Count => _entries.Length;
-
-    //public void Add(T item, int weight) => _entries.Add(new Entry(item, weight));
+    public int Length => _entries.Length;
     
     private int[] _cumulativeWeights;
 
@@ -83,14 +81,4 @@ public class WeightedRandomArray<T>
             _cumulativeWeights[i] = _cumulativeWeights[i - 1] + _entries[i].weight;
         }
     }
-
-    // private void CalculateDropPercentage()
-    // {
-    //     int total = _entries.Sum(item => item.weight);
-    //
-    //     foreach (var e in _entries)
-    //     {
-    //         e.dropChance = (float) e.weight / total * 100.0f;
-    //     }
-    // }
 }
