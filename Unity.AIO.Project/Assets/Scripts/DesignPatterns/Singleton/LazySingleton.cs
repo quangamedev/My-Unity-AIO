@@ -23,13 +23,13 @@ namespace DesignPatterns.Singleton
         {
             get
             {
-                if (_instance != null) return _instance;
+                if (!_instance) return _instance;
                 
                 //find all instances in the scene of the same type
-                _instance = GameObject.FindObjectOfType<T>();
+                _instance = FindObjectOfType<T>();
 
                 //If there is still no instance found, create a new object with the wanted class
-                if (_instance == null)
+                if (!_instance)
                     _instance = new GameObject("Lazy Singleton (instance) of " + typeof(T)).AddComponent<T>();
                 
                 return _instance;
@@ -41,8 +41,10 @@ namespace DesignPatterns.Singleton
         protected virtual void Awake()
         {
             //if the instance already exists, destroy it to prevent duplicates
-            if (_instance != null)
-                Destroy(this.gameObject);
+            if (!_instance)
+                _instance = this as T;
+            else
+                Destroy(gameObject);
         }
     }
 }

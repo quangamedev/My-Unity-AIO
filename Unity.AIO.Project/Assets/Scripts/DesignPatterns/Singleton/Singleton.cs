@@ -23,10 +23,10 @@ namespace DesignPatterns.Singleton
         {
             get
             {
-                if (_instance != null) return _instance;
+                if (!_instance) return _instance;
                 
                 //find all instances in the scene of the same type
-                _instance = GameObject.FindObjectOfType<T>();
+                _instance = FindObjectOfType<T>();
                 
                 return _instance;
             }
@@ -37,8 +37,10 @@ namespace DesignPatterns.Singleton
         protected virtual void Awake()
         {
             //if the instance already exists, destroy it to prevent duplicates
-            if (_instance != null)
-                Destroy(this.gameObject);
+            if (!_instance)
+                _instance = this as T;
+            else
+                Destroy(gameObject);
         }
         
     }
