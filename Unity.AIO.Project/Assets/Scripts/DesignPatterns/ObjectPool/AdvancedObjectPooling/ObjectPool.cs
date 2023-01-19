@@ -5,12 +5,11 @@ Author: Quan Nguyen
 Date:   15/01/21
 --------------------------------------*/
 
-using System;
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using DesignPatterns.ObjectPool;
 using DesignPatterns.Singleton;
+using Object = UnityEngine.Object;
 
 namespace DesignPatterns.ObjectPool
 {
@@ -22,19 +21,19 @@ namespace DesignPatterns.ObjectPool
     {
         private ComponentPool componentPool = new ComponentPool();
 
-        public void PreloadPool<T>(T prefabReference, int count = 1) where T : Component
+        public void PreloadPool<T>(T originalReference, int count = 1) where T : Component
         {
-            componentPool.AddToPool(prefabReference, count);
+            componentPool.AddToPool(originalReference, count);
         }
     
-        public T Spawn<T>(T prefabReference, int count = 1) where T : Component
+        public T Spawn<T>(T originalReference) where T : Component
         {
-            return componentPool.GetAvailableObject(prefabReference);
+            return componentPool.GetAvailableObject(originalReference);
         }
 
-        public void Recycle<T>(T objectReference) where T : Component
+        public void Recycle<T>(T cloneReference) where T : Component
         {
-            componentPool.ReturnObjectToPool(objectReference);
+            componentPool.ReturnCloneToPool(cloneReference);
         }
     }
 }
@@ -42,7 +41,7 @@ namespace DesignPatterns.ObjectPool
 public class ComponentPool
 {
     //the queue of pooled components by their type and asset reference
-    private Dictionary<Type, Dictionary<GameObject ,Queue<Component>>> _pooledComponentsByType = new Dictionary<Type, Dictionary<GameObject, Queue<Component>>>();
+    private Dictionary<GameObject ,Queue<Component>> _pooledComponentsByType = new Dictionary<GameObject ,Queue<Component>>();
 
     //dictionaries of instantied objects and their original object
     private Dictionary<GameObject, GameObject> _originalsByInstantiatedObjects = new Dictionary<GameObject, GameObject>();
@@ -50,43 +49,31 @@ public class ComponentPool
     /// <summary>
     /// Add new objects to the pool.
     /// </summary>
-    /// <param name="prefabReference">Referenced object</param>
+    /// <param name="originalReference">Referenced object</param>
     /// <param name="count">Number of objects</param>
     /// <typeparam name="T">Type reference of the object</typeparam>
     /// <returns></returns>
-    public Queue<Component> AddToPool<T>(T prefabReference, int count = 1) where T : Component
+    public Queue<Component> AddToPool<T>(T originalReference, int count = 1) where T : Component
     {
-        Type compType = prefabReference.GetType();
+        Queue<Component> components;
 
-        if (count <= 0)
+        if (!_pooledComponentsByType.TryGetValue(originalReference.gameObject, out components))
         {
-            Debug.LogError("Count cannot be <= 0");
+            _pooledComponentsByType.Add(originalReference.gameObject, components = new Queue<Component>());
+        }
+        
+        if (count < 0)
+        {
+            Debug.LogError("Count cannot be negative");
             return null;
         }
 
-        Queue<Component> components;
-
-        if (_pooledComponentsByType.TryGetValue(compType, out var componentsByPrefab))
-        {
-            //Check if the component type already exist in the Dictionary
-            if (!componentsByPrefab.TryGetValue(prefabReference.gameObject, out components))
-            {
-                componentsByPrefab.Add(prefabReference.gameObject, components = new Queue<Component>(count));
-            }
-        }
-        else
-        {
-            componentsByPrefab = new Dictionary<GameObject, Queue<Component>>
-                {{prefabReference.gameObject, components = new Queue<Component>(count)}};
-            _pooledComponentsByType.Add(compType, componentsByPrefab);
-        }
-        
         //Create the type of component x times
         for (int i = 0; i < count; i++)
         {
             //Instantiate new component and UPDATE the List of components
-            Component instance = GameObject.Instantiate(prefabReference);
-            _originalsByInstantiatedObjects.Add(instance.gameObject,prefabReference.gameObject);
+            Component instance = Object.Instantiate(originalReference);
+            _originalsByInstantiatedObjects.Add(instance.gameObject,originalReference.gameObject);
             //De-activate each one until when needed
             instance.gameObject.SetActive(false);
             components.Enqueue(instance);
@@ -97,13 +84,10 @@ public class ComponentPool
 
 
     //Get available component in the ComponentPool
-    public T GetAvailableObject<T>(T prefabReference) where T : Component
+    public T GetAvailableObject<T>(T originalReference) where T : Component
     {
-        Type compType = prefabReference.GetType();
-        
         //Get all component with the requested type from  the Dictionary
-        if (_pooledComponentsByType.TryGetValue(compType, out Dictionary<GameObject, Queue<Component>> componentsByPrefab)
-            && componentsByPrefab.TryGetValue(prefabReference.gameObject, out Queue<Component> components))
+        if (_pooledComponentsByType.TryGetValue(originalReference.gameObject, out Queue<Component> components))
         {
             if (components.Count > 0)
             {
@@ -115,44 +99,46 @@ public class ComponentPool
 
         //No available object in the pool. Expand list
         //Create new component, activate the GameObject and return it
-        Component instance = AddToPool(prefabReference).Dequeue();
+        Component instance = AddToPool(originalReference).Dequeue();
         instance.gameObject.SetActive(true);
         return (T) instance;
     }
 
-    public void ReturnObjectToPool<T>(T objectReference) where T : Component
+    public void ReturnCloneToPool<T>(T cloneReference) where T : Component
     {
-        Type compType = objectReference.GetType();
         Queue<Component> components;
         
-        GameObject obj = objectReference.gameObject;
-        obj.transform.position = Vector3.zero;
-        obj.transform.rotation = Quaternion.identity;
-        objectReference.gameObject.SetActive(false);
+        GameObject clone = cloneReference.gameObject;
+        clone.transform.position = Vector3.zero;
+        clone.transform.rotation = Quaternion.identity;
+        clone.SetActive(false);
 
-        GameObject original;
-        if (!_originalsByInstantiatedObjects.TryGetValue(objectReference.gameObject, out original))
+        GameObject original = GetOriginal(clone);
+        
+        if (!_pooledComponentsByType.TryGetValue(original, out components))
         {
-            original = objectReference.gameObject;
-            _originalsByInstantiatedObjects.Add(original, original);
+            _pooledComponentsByType.Add(original, components = new Queue<Component>());
         }
         
-        if (_pooledComponentsByType.TryGetValue(compType, out var componentsByPrefab))
+        components.Enqueue(cloneReference);
+    }
+
+    private GameObject GetOriginal(GameObject clone)
+    {
+        if (_originalsByInstantiatedObjects.TryGetValue(clone, out var original))
+            return original;
+
+        return SetOriginal(clone, clone);
+    }
+    
+    private GameObject SetOriginal(GameObject clone, GameObject original)
+    {
+        if (!_originalsByInstantiatedObjects.ContainsKey(clone))
         {
-            //Check if the component type already exist in the Dictionary
-            if (!componentsByPrefab.TryGetValue(original, out components))
-            {
-                componentsByPrefab.Add(original, components = new Queue<Component>());
-            }
+            _originalsByInstantiatedObjects.Add(clone, original);
         }
-        else
-        {
-            componentsByPrefab = new Dictionary<GameObject, Queue<Component>>
-                {{objectReference.gameObject, components = new Queue<Component>()}};
-            _pooledComponentsByType.Add(compType, componentsByPrefab);
-        }
-        
-        components.Enqueue(objectReference);
+
+        return original;
     }
 }
 
