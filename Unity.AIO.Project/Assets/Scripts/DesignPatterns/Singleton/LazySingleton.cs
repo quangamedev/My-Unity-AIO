@@ -30,7 +30,7 @@ namespace DesignPatterns.Singleton
 
                 //If there is still no instance found, create a new object with the wanted class
                 if (!_instance)
-                    _instance = new GameObject("Lazy Singleton (instance) of " + typeof(T)).AddComponent<T>();
+                    _instance = new GameObject("Lazy instantiated singleton of " + typeof(T).Name).AddComponent<T>();
                 
                 return _instance;
             }
