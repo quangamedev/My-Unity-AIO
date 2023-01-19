@@ -23,7 +23,7 @@ namespace DesignPatterns.Singleton
         {
             get
             {
-                if (!_instance) return _instance;
+                if (_instance) return _instance;
                 
                 //find all instances in the scene of the same type
                 _instance = FindObjectOfType<T>();

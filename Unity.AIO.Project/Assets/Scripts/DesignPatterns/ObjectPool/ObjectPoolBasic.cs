@@ -15,7 +15,7 @@ namespace DesignPatterns.ObjectPool
     /// This class is a pool that contains pools of other objects.
     /// This class can be used to create and pool any object.
     /// </summary>
-    public class ObjectPool : Singleton<ObjectPool>
+    public class ObjectPoolBasic : Singleton<ObjectPoolBasic>
     {
         //Dictionary that contains many queues of objects (object pools)
         private Dictionary<string, Queue<GameObject>> _objectPool = new Dictionary<string, Queue<GameObject>>();
