@@ -44,7 +44,7 @@ public class ComponentPool
     private Dictionary<GameObject ,Queue<Component>> _pooledComponentsByType = new Dictionary<GameObject ,Queue<Component>>();
 
     //dictionaries of instantied objects and their original object
-    private Dictionary<GameObject, GameObject> _originalsByInstantiatedObjects = new Dictionary<GameObject, GameObject>();
+    private Dictionary<GameObject, GameObject> _originalsByClones = new Dictionary<GameObject, GameObject>();
 
     /// <summary>
     /// Add new objects to the pool.
@@ -72,11 +72,11 @@ public class ComponentPool
         for (int i = 0; i < count; i++)
         {
             //Instantiate new component and UPDATE the List of components
-            Component instance = Object.Instantiate(originalReference);
-            _originalsByInstantiatedObjects.Add(instance.gameObject,originalReference.gameObject);
+            Component clone = Object.Instantiate(originalReference);
+            _originalsByClones.Add(clone.gameObject,originalReference.gameObject);
             //De-activate each one until when needed
-            instance.gameObject.SetActive(false);
-            components.Enqueue(instance);
+            clone.gameObject.SetActive(false);
+            components.Enqueue(clone);
         }
 
         return components;
@@ -93,15 +93,15 @@ public class ComponentPool
             {
                 var component = components.Dequeue();
                 component.gameObject.SetActive(true);
-                return (T)component;
+                return (T) component;
             }
         }
 
         //No available object in the pool. Expand list
         //Create new component, activate the GameObject and return it
-        Component instance = AddToPool(originalReference).Dequeue();
-        instance.gameObject.SetActive(true);
-        return (T) instance;
+        Component clone = AddToPool(originalReference).Dequeue();
+        clone.gameObject.SetActive(true);
+        return (T) clone;
     }
 
     public void ReturnCloneToPool<T>(T cloneReference) where T : Component
@@ -125,7 +125,7 @@ public class ComponentPool
 
     private GameObject GetOriginal(GameObject clone)
     {
-        if (_originalsByInstantiatedObjects.TryGetValue(clone, out var original))
+        if (_originalsByClones.TryGetValue(clone, out var original))
             return original;
 
         return SetOriginal(clone, clone);
@@ -133,9 +133,9 @@ public class ComponentPool
     
     private GameObject SetOriginal(GameObject clone, GameObject original)
     {
-        if (!_originalsByInstantiatedObjects.ContainsKey(clone))
+        if (!_originalsByClones.ContainsKey(clone))
         {
-            _originalsByInstantiatedObjects.Add(clone, original);
+            _originalsByClones.Add(clone, original);
         }
 
         return original;
