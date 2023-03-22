@@ -154,8 +154,8 @@ public static class ObjectPoolExtension
         ObjectPool.Instance.Recycle(component);
     }
     
-    public static T SpawnFromPool<T>(this Component component) where T : Component
+    public static T SpawnFromPool<T>(this T component) where T : Component
     {
-        return (T) ObjectPool.Instance.Spawn(component);
+        return ObjectPool.Instance.Spawn(component);
     }
 }
