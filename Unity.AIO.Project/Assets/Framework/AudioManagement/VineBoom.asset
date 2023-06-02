@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 358e1af154d2a0c47ab94bf2ed5f3967, type: 3}
+  m_Name: VineBoom
+  m_EditorClassIdentifier: 
+  _audioCueObject: {fileID: -117418580711530053, guid: f770b899aa035304696aff66a23cee87, type: 3}
+  clips:
+  - {fileID: 8300000, guid: d21afdb1f7895dd48bbde1f19a4a68ba, type: 3}
+  volume: {x: 0.5, y: 0.5}
+  minPitch: 0.55
+  maxPitch: 1.78
+  playOrder: 0
+  playIndex: 0

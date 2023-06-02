@@ -1,0 +1,31 @@
+using UnityEngine;
+
+namespace Framework.Samples.SaveSytem
+{
+    /// <summary>
+    /// An example class that needs to have data saved.
+    /// This class, as well as other classes that needs saving, must implement the ISaveable interface.
+    /// </summary>
+    public class SaveSystemPositionDemo : MonoBehaviour, ISaveable
+    {
+        public object SaveState()
+        {
+            return new SaveData() {posX = transform.position.x, posY = transform.position.y, posZ = transform.position.z};
+        }
+
+        public void LoadState(object state)
+        {
+            var saveData = (SaveData)state;
+            transform.position = new Vector3(saveData.posX, saveData.posY, saveData.posZ);
+        }
+
+        /// <summary>
+        /// This struct is used to define what to save
+        /// </summary>
+        [System.Serializable]
+        private struct SaveData
+        {
+            public float posX, posY, posZ;
+        }
+    }
+}
