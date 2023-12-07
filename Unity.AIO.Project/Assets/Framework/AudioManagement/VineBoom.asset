@@ -15,7 +15,9 @@ MonoBehaviour:
   _audioCueObject: {fileID: -117418580711530053, guid: f770b899aa035304696aff66a23cee87, type: 3}
   clips:
   - {fileID: 8300000, guid: d21afdb1f7895dd48bbde1f19a4a68ba, type: 3}
-  volume: {x: 0.5, y: 0.5}
+  output: {fileID: 8862341894998437737, guid: 94ca49b59d0fcec42ab502cba182be94, type: 2}
+  minVolume: 0.8
+  maxVolume: 1
   minPitch: 0.55
   maxPitch: 1.78
   playOrder: 0

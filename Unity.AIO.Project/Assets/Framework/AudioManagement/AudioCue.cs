@@ -1,63 +1,34 @@
 using System;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "NewSoundEffect", menuName = "Audio/New Sound Effect")]
 public class AudioCue : ScriptableObject
 {
-	#region config
-
 	[SerializeField] private AudioSource _audioCueObject;
 
 	[SerializeField] private AudioClip[] clips;
 
-	[SerializeField] private Vector2 volume = new Vector2(0.5f, 0.5f);
+	[SerializeField] private AudioMixerGroup output;
 
-	[Range(0.55f, 1.78f)]
+	[Range(0, 1)]
+	[SerializeField] private float minVolume = 0.8f;
+
+	[Range(0, 1)]
+	[SerializeField] private float maxVolume = 1f;
+
+	[Range(0, 3)]
 	[SerializeField] private float minPitch = 0.55f;
 
-	[Range(0.63f, 1.78f)]
+	[Range(0, 3)]
 	[SerializeField] private float maxPitch = 1.78f;
 
 
 	[SerializeField] private SoundClipPlayOrder playOrder;
 
 	[SerializeField] private int playIndex = 0;
-
-	#endregion
-
-	#region PreviewCode
-
-#if UNITY_EDITOR
-	private AudioSource previewer;
-
-	private void OnEnable()
-	{
-		previewer = EditorUtility
-			.CreateGameObjectWithHideFlags("AudioPreview", HideFlags.HideAndDontSave,
-				typeof(AudioSource))
-			.GetComponent<AudioSource>();
-	}
-
-	private void OnDisable()
-	{
-		DestroyImmediate(previewer.gameObject);
-	}
-
-	public void PlayPreview()
-	{
-		Play(previewer);
-	}
-
-	public void StopPreview()
-	{
-		previewer.Stop();
-	}
-
-#endif
-
-	#endregion
 
 	private AudioClip GetAudioClip()
 	{
@@ -87,7 +58,7 @@ public class AudioCue : ScriptableObject
 		return Play(null, position);
 	}
 
-	public AudioSource Play(AudioSource audioSourceParam = null, Vector3 position = new Vector3(), bool loop = false)
+	public AudioSource Play(AudioSource audioSourceParam = null, Vector3 position = new Vector3(), bool loop = false, AudioMixerGroup audioMixerGroup = null)
 	{
 		if (clips.Length == 0)
 		{
@@ -95,15 +66,21 @@ public class AudioCue : ScriptableObject
 		}
 
 		var source = audioSourceParam;
-		if (source == null)
+		if (!source)
 		{
 			source = _audioCueObject.SpawnFromPool();
 			source.transform.position = position;
 		}
 
+		if (audioMixerGroup)
+			output = audioMixerGroup;
+
+		if (output)
+			source.outputAudioMixerGroup = output;
+
 		// set source config:
 		source.clip = GetAudioClip();
-		source.volume = Random.Range(volume.x, volume.y);
+		source.volume = Random.Range(minVolume, maxVolume);
 		source.pitch = Random.Range(minPitch, maxPitch);
 		source.loop = loop;
 		source.Play();
@@ -119,6 +96,64 @@ public class AudioCue : ScriptableObject
 
 		return source;
 	}
+
+#if UNITY_EDITOR
+	private AudioSource previewer;
+
+	private void OnEnable()
+	{
+		previewer = EditorUtility
+			.CreateGameObjectWithHideFlags("AudioPreview", HideFlags.HideAndDontSave,
+				typeof(AudioSource))
+			.GetComponent<AudioSource>();
+	}
+
+	private void OnDisable()
+	{
+		DestroyImmediate(previewer.gameObject);
+	}
+
+	public void PlayPreview()
+	{
+		Play(previewer);
+	}
+
+	public void StopPreview()
+	{
+		previewer.Stop();
+	}
+
+	private float lastUpdatedMinVolume;
+	private float lastUpdatedMaxVolume;
+	private float lastUpdatedMinPitch;
+	private float lastUpdatedMaxPitch;
+	private void OnValidate()
+	{
+		if (minVolume > maxVolume && minVolume > lastUpdatedMinVolume)
+		{
+			maxVolume = minVolume;
+		}
+		else if (minVolume > maxVolume && maxVolume < lastUpdatedMaxVolume)
+		{
+			minVolume = maxVolume;
+		}
+		
+		lastUpdatedMinVolume = minVolume;
+		lastUpdatedMaxVolume = maxVolume;
+
+		if (minPitch > maxPitch && minPitch > lastUpdatedMinPitch)
+		{
+			maxPitch = minPitch;
+		}
+		else if (minPitch > maxPitch && maxPitch < lastUpdatedMaxPitch)
+		{
+			minPitch = maxPitch;
+		}
+
+		lastUpdatedMinPitch = minPitch;
+		lastUpdatedMaxPitch = maxPitch;
+	}
+#endif
 
 	enum SoundClipPlayOrder
 	{
