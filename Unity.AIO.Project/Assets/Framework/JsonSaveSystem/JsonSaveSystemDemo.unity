@@ -220,9 +220,9 @@ GameObject:
   - component: {fileID: 1611944440}
   - component: {fileID: 1611944439}
   - component: {fileID: 1611944438}
+  - component: {fileID: 1611944445}
   - component: {fileID: 1611944444}
   - component: {fileID: 1611944443}
-  - component: {fileID: 1611944445}
   m_Layer: 0
   m_Name: DataHolder
   m_TagString: Untagged
@@ -333,11 +333,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1611944437}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb94e270038bf8e448b87feab0e091f0, type: 3}
+  m_Script: {fileID: 11500000, guid: ee64446b393adb1499c16101c1304c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _highScore: 100
-  _bestTime: 200
+  _rigidbody: {fileID: 1611944438}
 --- !u!114 &1611944444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,10 +346,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1611944437}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c66fef16093857c4c8d70e94327ae5b5, type: 3}
+  m_Script: {fileID: 11500000, guid: ca6471138052c9549b11301731fa67a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: be24df04-48ef-425d-ab2a-91fa18c16a03
+  _highScore: 100
+  _bestTime: 200
 --- !u!114 &1611944445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,10 +360,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1611944437}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af53c21b96b04a5faab25b56acbf4e26, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rigidbody: {fileID: 1611944438}
+  uniqueIdentifier: 40b69ab4-e626-4dcf-bc8a-c69979b1c6af
 --- !u!1 &1719569920
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,6 +596,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1829414050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9de6cf8a8e94b68b8a95992028531df, type: 3}
+  m_Script: {fileID: 11500000, guid: 36f54b488dbe09c4e8268b5a381890ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  strategy: {fileID: 11400000, guid: 7d155af47ab38c14cad8e44e755476d6, type: 2}

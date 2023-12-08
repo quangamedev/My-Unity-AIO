@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 #endif
 
-public class SaveManager : Singleton<SaveManager>
+public class SaveSystem : Singleton<SaveSystem>
 {
     private string _path;
 
@@ -40,20 +40,20 @@ public class SaveManager : Singleton<SaveManager>
     {
         //loads the previous saved files to the state variable
         //this step is necessary so saves from other places like scenes will not be overriden
-        var state = LoadFile();
+        var state = LoadFromFile();
 
         //Saves states to a Dictionary
         SaveState(state);
 
         //Saves the state to a file
-        SaveFile(state);
+        SaveToFile(state);
     }
 
     [ContextMenu("Load")]
     public void Load()
     {
         //loads the previous saved files to the state variable
-        var state = LoadFile();
+        var state = LoadFromFile();
 
         //loads the states to GameObjects
         LoadState(state);
@@ -63,7 +63,7 @@ public class SaveManager : Singleton<SaveManager>
     /// Saves the file to the designated path.
     /// </summary>
     /// <param name="state">The data that will be saved.</param>
-    private void SaveFile(object state)
+    private void SaveToFile(object state)
     {
         //Opens the file with create mode
         using var stream = File.Open(_path, FileMode.Create);
@@ -79,7 +79,7 @@ public class SaveManager : Singleton<SaveManager>
     /// Loads in the save file.
     /// </summary>
     /// <returns>Saved data if there is any</returns>
-    private Dictionary<string, object> LoadFile()
+    private Dictionary<string, object> LoadFromFile()
     {
         //if there is no previous saved data, return an empty Dictionary
         if (!File.Exists(_path)) return new Dictionary<string, object>();
@@ -100,7 +100,7 @@ public class SaveManager : Singleton<SaveManager>
     private void SaveState(Dictionary<string, object> state)
     {
         //Finds and Loops through all GameObjects with the SaveableObject component
-        foreach (var saveable in FindObjectsOfType<SaveableObject>())
+        foreach (var saveable in FindObjectsOfType<SaveableEntity>())
         {
             //set the specific values in the dictionary according to its id
             state[saveable.Id] = saveable.SaveSate();
@@ -114,7 +114,7 @@ public class SaveManager : Singleton<SaveManager>
     private void LoadState(Dictionary<string, object> state)
     {
         //Finds and Loops through all GameObjects with the SaveableObject component
-        foreach (var saveable in FindObjectsOfType<SaveableObject>())
+        foreach (var saveable in FindObjectsOfType<SaveableEntity>())
         {
             //get the specific values in the dictionary according to its id and load in the saved data if it is valid
             if (state.TryGetValue(saveable.Id, out object value))

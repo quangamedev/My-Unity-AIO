@@ -7,11 +7,11 @@ public interface ISaveable
     ///
     /// </summary>
     /// <returns>Returns an object because this system is used for multiple scenarios</returns>
-    object SaveState();
+    object CaptureState();
 
     /// <summary>
     ///
     /// </summary>
     /// <param name="state"></param>
-    void LoadState(object state);
+    void RestoreState(object state);
 }

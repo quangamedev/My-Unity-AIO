@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// This class must be added to objects that has 1 or more components that need saving.
 /// </summary>
-public class SaveableObject : MonoBehaviour
+public class SaveableEntity : MonoBehaviour
 {
     [Tooltip("Generate this before saving or loading.")] [SerializeField]
     private string id = string.Empty;
@@ -33,7 +33,7 @@ public class SaveableObject : MonoBehaviour
         foreach (var saveable in GetComponents<ISaveable>())
         {
             //Sets the Value of the Dictionary according to classes that implements ISaveable
-            state[saveable.GetType().ToString()] = saveable.SaveState();
+            state[saveable.GetType().ToString()] = saveable.CaptureState();
         }
 
         return state;
@@ -56,12 +56,12 @@ public class SaveableObject : MonoBehaviour
 
             //If a value is found successfully, call the LoadState method in the component with ISaveble and pass in the object
             if (stateDictionary.TryGetValue(typeName, out object value))
-                saveable.LoadState(value);
+                saveable.RestoreState(value);
         }
     }
 
 #if UNITY_EDITOR
-    private static Dictionary<string, SaveableObject> s_globalLookup = new Dictionary<string, SaveableObject>();
+    private static Dictionary<string, SaveableEntity> s_globalLookup = new Dictionary<string, SaveableEntity>();
     private void OnValidate()
     {
         if (Application.IsPlaying(gameObject)) return;
