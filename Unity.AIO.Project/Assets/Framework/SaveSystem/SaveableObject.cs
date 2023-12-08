@@ -10,13 +10,7 @@ public class SaveableObject : MonoBehaviour
     [Tooltip("Generate this before saving or loading.")] [SerializeField]
     private string id = string.Empty;
 
-    public string Id
-    {
-        get
-        {
-            return id;
-        }
-    }
+    public string Id => id;
 
     [ContextMenu("Generate Id")]
     private void GenerateId()
@@ -65,4 +59,41 @@ public class SaveableObject : MonoBehaviour
                 saveable.LoadState(value);
         }
     }
+
+#if UNITY_EDITOR
+    private static Dictionary<string, SaveableObject> s_globalLookup = new Dictionary<string, SaveableObject>();
+    private void OnValidate()
+    {
+        if (Application.IsPlaying(gameObject)) return;
+        if (string.IsNullOrEmpty(gameObject.scene.path)) return;
+            
+        if (string.IsNullOrEmpty(Id) || !IsUnique(Id))
+        {
+            GenerateId();
+        }
+
+        s_globalLookup[Id] = this;
+    }
+    
+    private bool IsUnique(string candidate)
+    {
+        if (!s_globalLookup.ContainsKey(candidate)) return true;
+
+        if (s_globalLookup[candidate] == this) return true;
+
+        if (s_globalLookup[candidate] == null)
+        {
+            s_globalLookup.Remove(candidate);
+            return true;
+        }
+
+        if (s_globalLookup[candidate].Id != candidate)
+        {
+            s_globalLookup.Remove(candidate);
+            return true;
+        }
+
+        return false;
+    }
+#endif
 }
