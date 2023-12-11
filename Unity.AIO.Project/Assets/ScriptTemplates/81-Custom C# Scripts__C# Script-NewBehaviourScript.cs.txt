@@ -1,9 +1,3 @@
-/*--------------------------------------
-Author: NAME
-+---------------------------------------
-Last modified by: NAME
---------------------------------------*/
-
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;

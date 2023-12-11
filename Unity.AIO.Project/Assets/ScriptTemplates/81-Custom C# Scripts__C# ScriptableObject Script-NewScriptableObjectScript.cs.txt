@@ -1,9 +1,3 @@
-/*--------------------------------------
-Author: NAME
-+---------------------------------------
-Last modified by: NAME
---------------------------------------*/
-
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New #SCRIPTNAME#", menuName = "Scriptable Objects/#SCRIPTNAME#", order = 0)]
