@@ -24,9 +24,14 @@ namespace ThirdParty.Samples.UnityScreenNavigator
         }
 
         [ContextMenu("Push Test Modal")]
-        private void PushTestModal()
+        private async void PushTestModal()
         {
-            ModalContainer.Find("MainModalContainer").Push("BasicModal", true);
+            BasicModal basicModal = null;
+            var handle = ModalContainer.Find("MainModalContainer").Push<BasicModal>("BasicModal", true, onLoad: tuple =>
+                basicModal = tuple.modal);
+            await handle.Task;
+            return;
+            basicModal.Close();
         }
     }
 }
