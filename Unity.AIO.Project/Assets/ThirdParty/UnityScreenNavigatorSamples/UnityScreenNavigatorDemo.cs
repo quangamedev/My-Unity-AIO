@@ -30,8 +30,7 @@ namespace ThirdParty.Samples.UnityScreenNavigator
             var handle = ModalContainer.Find("MainModalContainer").Push<BasicModal>("BasicModal", true, onLoad: tuple =>
                 basicModal = tuple.modal);
             await handle.Task;
-            return;
-            basicModal.Close();
+            // basicModal.Close();
         }
     }
 }
