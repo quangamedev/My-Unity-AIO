@@ -100,7 +100,7 @@ public class JsonSaveSystem : MonoBehaviour
 		IDictionary<string, JToken> stateDict = state;
 		foreach (JsonSaveableEntity saveable in FindObjectsOfType<JsonSaveableEntity>())
 		{
-			stateDict[saveable.GetUniqueIdentifier()] = saveable.CaptureAsJtoken();
+			stateDict[saveable.GetUniqueIdentifier()] = saveable.CaptureAsJToken();
 		}
 
 		stateDict["lastSceneBuildIndex"] = SceneManager.GetActiveScene().buildIndex;

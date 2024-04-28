@@ -17,7 +17,7 @@ public class JsonSaveableEntity : MonoBehaviour
 		return uniqueIdentifier;
 	}
 
-	public JToken CaptureAsJtoken()
+	public JToken CaptureAsJToken()
 	{
 		JObject state = new JObject();
 		IDictionary<string, JToken> stateDict = state;
@@ -25,7 +25,9 @@ public class JsonSaveableEntity : MonoBehaviour
 		{
 			JToken token = jsonSaveable.CaptureAsJToken();
 			string component = jsonSaveable.GetType().ToString();
-			Debug.Log($"{name} Capture {component} = {token.ToString()}");
+#if UNITY_EDITOR
+			Debug.Log($"{name} Capture {component} = {Environment.NewLine} {token.ToString()}", gameObject);
+#endif
 			stateDict[jsonSaveable.GetType().ToString()] = token;
 		}
 
@@ -41,7 +43,9 @@ public class JsonSaveableEntity : MonoBehaviour
 			string component = jsonSaveable.GetType().ToString();
 			if (stateDict.ContainsKey(component))
 			{
-				Debug.Log($"{name} Restore {component} =>{stateDict[component].ToString()}");
+#if UNITY_EDITOR
+				Debug.Log($"{name} Restore {component} => {Environment.NewLine} {stateDict[component].ToString()}", gameObject);
+#endif
 				jsonSaveable.RestoreFromJToken(stateDict[component]);
 			}
 		}
