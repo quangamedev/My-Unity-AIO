@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "79bdfc79b9e3ae28ec4edca5c2394242df507123"
     },
+    "com.dbrizov.naughtyattributes": {
+      "version": "https://github.com/dbrizov/NaughtyAttributes.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "8a8fa5a9659a6d63f196391c71e06c4286c8acd7"
+    },
     "com.harumak.unityscreennavigator": {
       "version": "https://github.com/Haruma-K/UnityScreenNavigator.git?path=/Assets/UnityScreenNavigator",
       "depth": 0,
