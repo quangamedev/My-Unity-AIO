@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class JsonSaveSystem : Singleton<JsonSaveSystem>
+public class JsonSaveSystem : MonoBehaviour
 {
 	[SerializeField] JObjectSaveStrategy strategy;
 

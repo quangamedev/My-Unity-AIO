@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// AudioManager for 2D audio.
 /// </summary>
-public class AudioManager : Singleton<AudioManager>
+public class AudioManager : MonoBehaviour
 {
     [System.Serializable]
     public class SoundClip

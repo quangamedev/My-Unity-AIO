@@ -6,13 +6,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 #endif
 
-public class SaveSystem : Singleton<SaveSystem>
+public class SaveSystem : MonoBehaviour
 {
     private string _path;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
         _path = Application.persistentDataPath + "/save.dat";
     }
 
