@@ -2,7 +2,7 @@ using System.Diagnostics;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
-public static class GameDebug
+public static class CustomDebug
 {
     [Conditional("ENABLE_REGULAR_LOGS"), Conditional("UNITY_EDITOR")]
     public static void Log(this object loggingObject, string message)
