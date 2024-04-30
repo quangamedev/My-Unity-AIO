@@ -8,11 +8,20 @@ using UnityEngine.InputSystem;
 
 public class SaveSystem : MonoBehaviour
 {
+    [SerializeField] string saveFileName = "save";
+    [SerializeField] bool loadOnStart;
+
     private string _path;
 
     protected void Awake()
     {
-        _path = Application.persistentDataPath + "/save.dat";
+        _path = Application.persistentDataPath + $"/{saveFileName}.dat";
+    }
+
+    private void Start()
+    {
+        if (!loadOnStart) return;
+        Load();
     }
 
     private void Update()

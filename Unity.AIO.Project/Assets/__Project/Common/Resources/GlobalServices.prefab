@@ -122,6 +122,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strategy: {fileID: 11400000, guid: 5026222c2f2f4e34b86e803bcab37edc, type: 2}
+  saveFileName: save
+  loadOnStart: 1
 --- !u!114 &4914250682956833343
 MonoBehaviour:
   m_ObjectHideFlags: 0

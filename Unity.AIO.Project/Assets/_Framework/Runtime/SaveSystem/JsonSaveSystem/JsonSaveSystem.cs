@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +8,14 @@ using UnityEngine.SceneManagement;
 public class JsonSaveSystem : MonoBehaviour
 {
 	[SerializeField] JObjectSaveStrategy strategy;
+	[SerializeField] string saveFileName = "save";
+	[SerializeField] bool loadOnStart;
+
+	private void Start()
+	{
+		if (!loadOnStart) return;
+		Load(saveFileName);
+	}
 
 	private void Update()
 	{
@@ -21,9 +28,9 @@ public class JsonSaveSystem : MonoBehaviour
             Save();
 #else
 		if (Input.GetKeyDown(KeyCode.L))
-			Load("save");
+			Load(saveFileName);
 		else if (Input.GetKeyDown(KeyCode.S))
-			Save("save");
+			Save(saveFileName);
 #endif
 
 #endif
