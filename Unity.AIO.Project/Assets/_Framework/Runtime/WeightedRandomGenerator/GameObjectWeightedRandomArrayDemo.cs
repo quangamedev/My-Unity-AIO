@@ -10,9 +10,7 @@ namespace Framework.Samples.WeightedRandom
         [ContextMenu("Test")]
         private void Test()
         {
-#if UNITY_EDITOR
-            EditorUtils.ClearEditorLogs();
-#endif
+            RuntimeEditorUtils.ClearEditorLogs();
 
             for (int i = 0; i < _iterations; i++)
             {

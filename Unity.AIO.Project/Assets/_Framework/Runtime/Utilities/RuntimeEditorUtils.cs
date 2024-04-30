@@ -1,9 +1,13 @@
 #if UNITY_EDITOR
-using System.Reflection;
 using UnityEditor;
+#endif
 
-public static class EditorUtils
+using System.Diagnostics;
+using System.Reflection;
+
+public static class RuntimeEditorUtils
 {
+    [Conditional("UNITY_EDITOR")]
     public static void ClearEditorLogs()
     {
         var assembly = Assembly.GetAssembly(typeof(Editor));
@@ -12,4 +16,3 @@ public static class EditorUtils
         method?.Invoke(new object(), null);
     }
 }
-#endif
