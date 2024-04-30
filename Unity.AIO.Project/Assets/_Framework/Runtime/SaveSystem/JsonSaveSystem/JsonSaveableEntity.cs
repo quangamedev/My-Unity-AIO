@@ -9,6 +9,12 @@ public class JsonSaveableEntity : MonoBehaviour
 {
 	[SerializeField] string uniqueIdentifier = "";
 
+	[ContextMenu("Generate Id")]
+	private void GenerateId()
+	{
+		uniqueIdentifier = Guid.NewGuid().ToString();
+	}
+
 	public string GetUniqueIdentifier()
 	{
 		return uniqueIdentifier;

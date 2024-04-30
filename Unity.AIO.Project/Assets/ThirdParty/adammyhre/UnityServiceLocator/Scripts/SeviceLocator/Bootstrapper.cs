@@ -19,20 +19,4 @@ namespace UnityServiceLocator {
         
         protected abstract void Bootstrap();
     }
-
-    [AddComponentMenu("ServiceLocator/ServiceLocator Global")]
-    public class ServiceLocatorGlobal : Bootstrapper {
-        [SerializeField] bool dontDestroyOnLoad = true;
-        
-        protected override void Bootstrap() {
-            Container.ConfigureAsGlobal(dontDestroyOnLoad);
-        }
-    }
-    
-    [AddComponentMenu("ServiceLocator/ServiceLocator Scene")]
-    public class ServiceLocatorScene : Bootstrapper {
-        protected override void Bootstrap() {
-            Container.ConfigureForScene();            
-        }
-    }
 }

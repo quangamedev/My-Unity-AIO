@@ -109,7 +109,7 @@ namespace UnityServiceLocator {
             services.Register(type, service);
             return this;
         }
-        
+
         /// <summary>
         /// Gets a service of a specific type. If no service of the required type is found, an error is thrown.
         /// </summary>
@@ -199,11 +199,13 @@ namespace UnityServiceLocator {
         [MenuItem("GameObject/ServiceLocator/Add Global")]
         static void AddGlobal() {
             var go = new GameObject(k_globalServiceLocatorName, typeof(ServiceLocatorGlobal));
+            Undo.RegisterCreatedObjectUndo(go, $"Create {k_globalServiceLocatorName}");
         }
 
         [MenuItem("GameObject/ServiceLocator/Add Scene")]
         static void AddScene() {
             var go = new GameObject(k_sceneServiceLocatorName, typeof(ServiceLocatorScene));
+            Undo.RegisterCreatedObjectUndo(go, $"Created {k_sceneServiceLocatorName}");
         }
 #endif
     }
