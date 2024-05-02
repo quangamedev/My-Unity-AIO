@@ -1,9 +1,9 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New #SCRIPTNAME#", menuName = "Scriptable Objects/#SCRIPTNAME#", order = 0)]
 /// <summary>
-/// 
+///
 /// </summary>
+[CreateAssetMenu(fileName = "New #SCRIPTNAME#", menuName = "Scriptable Objects/#SCRIPTNAME#", order = 0)]
 public class #SCRIPTNAME# : ScriptableObject
 {
     #NOTRIM#

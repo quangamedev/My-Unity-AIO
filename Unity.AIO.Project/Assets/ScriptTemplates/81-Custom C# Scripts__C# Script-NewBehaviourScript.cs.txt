@@ -7,19 +7,13 @@ using System.Collections.Generic;
 /// </summary>
 public class #SCRIPTNAME# : MonoBehaviour
 {
-    #region Fields
-    #NOTRIM#
-    #endregion
-
-    #region Unity Methods
     void Start()
     {
         #NOTRIM#
     }
- 
+
     void Update()
     {
         #NOTRIM#
     }
-    #endregion
 }
