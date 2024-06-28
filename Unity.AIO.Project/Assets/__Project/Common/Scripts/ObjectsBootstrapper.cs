@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Project.Common
+namespace Project
 {
 	public static class ObjectsBootstrapper
 	{
